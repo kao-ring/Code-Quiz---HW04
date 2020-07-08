@@ -104,7 +104,7 @@ choice2El.style.display = "none";
 choice3El.style.display = "none";
 choice4El.style.display = "none";
 form.style.display = "none";
-congrats.style.display = "none";
+congrats.style.display = "initial";
 
 //start button clicked!
 //user input====================================
@@ -238,6 +238,9 @@ function afterFinish() {
     //Disply user's name, score & highest score(i could get from local storage?)
     else {
       congrats.style.display = "initial";
+      form.style.display = "none";
+      img.style.display = "none";
+
       highestScore = Math.max.apply(null, scoreArray); // scoreArrayの中から最大値を取る
       userName.innerHTML = formText;
       finalScore.innerHTML =
