@@ -73,7 +73,7 @@ var questions = [
     correct: "//This is a comment",
   },
 ];
-//設問に必要な子たち。
+//Declair...設問に必要な子たち。
 var question; //store quesition
 var choice1; //store answer choice
 var choice2; //store answer choice
@@ -83,7 +83,7 @@ var userAnswer; //get a user's choice
 var correctAnswer; //store the corect answer
 var questionCount; //question number for getting array
 
-//DOM / HTML内の接続先。ボタンたち。
+//DOM / HTML内の接続先。Buttons
 var titleCallEl = document.querySelector("#titleCall");
 var readEl = document.querySelector("#read");
 var choice1El = document.querySelector("#choice1");
@@ -91,6 +91,11 @@ var choice2El = document.querySelector("#choice2");
 var choice3El = document.querySelector("#choice3");
 var choice4El = document.querySelector("#choice4");
 var img = document.querySelector("img");
+var form = document.querySelector("#form");
+var nameInput = document.querySelector("#nameInput");
+var finalScore = document.querySelector("#finalScore");
+var oneMore = document.querySelector("#oneMore");
+var congrats = document.querySelector("#congrats");
 
 var timeRemain = document.querySelector("#timeRemain");
 var timeLeft = 100; // Create the countdown timer.
@@ -101,8 +106,9 @@ choice1El.style.display = "none";
 choice2El.style.display = "none";
 choice3El.style.display = "none";
 choice4El.style.display = "none";
-
-//startボタンが押された！
+form.style.display = "none";
+congrats.style.display = "none";
+//start button clicked!
 //user input====================================
 var startButton = document.querySelector("#start");
 startButton.addEventListener("click", function (event) {
@@ -184,8 +190,10 @@ function checkAnswer() {
   });
 }
 
-//Quizが終わった=================================
+//Quiz Finished! =================================
+
 var scoreArray = [];
+var formText = nameInput.value.trim();
 function afterFinish() {
   choice1El.style.display = "none";
   choice2El.style.display = "none";
@@ -193,11 +201,28 @@ function afterFinish() {
   choice4El.style.display = "none";
   scoreArray.push(timeLeft);
 
-  //    <div class="form-group">
-  // <div>Your name</div>
-  // <input class="form-control" />
-  // <button class="btn btn-primary mt-5 bg-dark">Submit</button>
-  // </div>
+  titleCallEl.innerHTML = "Your score is " + timeLeft;
+  readEl.innerHTML = "";
+  form.style.display = "initial";
+
+  // When form is submitted...
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    // Return from function early if submitted todoText is blank
+    if (formText === "") {
+      return;
+    }
+    //Disply user's name, score & highest score(i could get from local storage?)
+    else {
+      congrats.style.display = "initial";
+      userName.innerHTML = formText;
+      finalScore.innerHTML =
+        "You got " + timeLeft + ", your highest score is " + highestScore;
+      oneMore.addEventListener("click", function () {
+        quizStart();
+      });
+    }
+  });
 }
 
 //Score Board====================================

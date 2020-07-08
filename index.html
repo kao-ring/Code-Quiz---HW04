@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <!-- ページトップ画面 -->
+    <!-- Top page screen -->
     <div class="container mt-4 mx-auto">
       <div class="jumbotron">
         <h1 class="display-3" id="titleCall">Coding Quiz Challenge</h1>
@@ -64,7 +64,7 @@
             START
           </button>
         </div>
-        <!-- クイズ画面 -->
+        <!-- Quiz screen -->
         <div id="answerButtons">
           <div class="row">
             <button
@@ -93,6 +93,25 @@
               class="btn btn-secondary mx-auto"
               id="choice4"
             ></button>
+          </div>
+        </div>
+        <!-- Finish screen -->
+        <div class="form-group m-auto" style="width: 50%;" id="form">
+          <div id="nameInput">Type your name</div>
+          <input class="form-control" />
+          <button class="btn btn-primary mt-5 bg-secondary">Submit</button>
+        </div>
+        <!-- Congrats screen -->
+        <div class="card m-auto" style="width: 18rem;" id="congrats">
+          <img src="Assets/congrats.gif" class="card-img-top" alt="Congrats!" />
+          <div class="card-body">
+            <h5 class="card-title" id="userName">user name</h5>
+            <p class="card-text" id="finalScore">
+              score here
+            </p>
+            <a href="#" class="btn btn-secondary" id="oneMore"
+              >Play One More?</a
+            >
           </div>
         </div>
       </div>
