@@ -74,16 +74,16 @@ var questions = [
   },
 ];
 //設問に必要な子たち。
-var question;
-var choice1;
-var choice2;
-var choice3;
-var choice4;
-var userAnswer;
-var correctAnswer;
-var questionCount;
+var question; //store quesition
+var choice1; //store answer choice
+var choice2; //store answer choice
+var choice3; //store answer choice
+var choice4; //store answer choice
+var userAnswer; //get a user's choice
+var correctAnswer; //store the corect answer
+var questionCount; //question number for getting array
 
-//HTML内の接続先。ボタンたち。
+//DOM / HTML内の接続先。ボタンたち。
 var titleCallEl = document.querySelector("#titleCall");
 var readEl = document.querySelector("#read");
 var choice1El = document.querySelector("#choice1");
@@ -94,6 +94,7 @@ var img = document.querySelector("img");
 
 var timeRemain = document.querySelector("#timeRemain");
 var timeLeft = 100; // Create the countdown timer.
+var i = 0; //question counter
 
 //Initiarize. 標準配備。
 choice1El.style.display = "none";
@@ -135,8 +136,6 @@ function quiz() {
   if (question === undefined) {
     afterFinish();
   } else {
-    var i = 0; //question counter
-
     answerCheck();
   }
 }
@@ -156,74 +155,42 @@ function setQuestion() {
   var num = i + 1;
   titleCallEl.innerHTML = "Question #" + num;
   readEl.innerHTML = question;
-  startButton.innerHTML = choice1;
+  choice1El.innerHTML = choice1;
   choice2El.innerHTML = choice2;
   choice3El.innerHTML = choice3;
   choice4El.innerHTML = choice4;
 }
 
-function answerCheck() {
-  //user anser check
-  choice1El.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (choice1 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
-    }
-  });
+var answerButtons = document.querySelector("#answerButtons");
 
-  choice2El.addEventListener("click", function (event) {
+function checkAnswer() {
+  answerButtons.addEventListener("click", function (event) {
     event.preventDefault();
-    if (choice2 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
-    }
-  });
+    if (event.target.matches("button")) {
+      var id = event.target.parentElement.id.replace("choice", ""); //#choice1
+      userAnswer = questions[i].a[parseInt(id)];
 
-  choice3El.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (choice3 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
-    }
-  });
-
-  choice4El.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (choice4 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
+      if (userAnswer === correctAnswer) {
+        i++;
+        img.setAttribute("src", "Assets/correct.jpg");
+        img.setAttribute("alt", "correct.jpg");
+      } else {
+        i++;
+        img.setAttribute("src", "Assets/wrong.jpg");
+        img.setAttribute("alt", "wrong.jpg");
+        timeLeft = timeLeft - 10;
+      }
     }
   });
 }
-//
+
 //Quizが終わった=================================
 var scoreArray = [];
 function afterFinish() {
+  choice1El.style.display = "none";
+  choice2El.style.display = "none";
+  choice3El.style.display = "none";
+  choice4El.style.display = "none";
   scoreArray.push(timeLeft);
 
   //    <div class="form-group">
@@ -237,7 +204,10 @@ function afterFinish() {
 var highScore = document.querySelector("#highestScore");
 var highestScore = Math.max.apply(null, scoreArray); // scoreArrayの中から最大値を取る
 var mode = "text";
-highScore.addEventListener("click", showScore);
+highScore.addEventListener("click", function (event) {
+  event.preventDefault();
+  showScore();
+});
 
 function showScore() {
   if (mode === "text") {
