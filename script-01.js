@@ -1,3 +1,4 @@
+//array question
 var questions = [
   {
     q: "Commonly data types DO NOT includes;",
@@ -73,35 +74,10 @@ var questions = [
     correct: "//This is a comment",
   },
 ];
-//設問に必要な子たち。
-var question;
-var choice1;
-var choice2;
-var choice3;
-var choice4;
-var userAnswer;
-var correctAnswer;
-var questionCount;
 
-//HTML内の接続先。ボタンたち。
-var titleCallEl = document.querySelector("#titleCall");
-var readEl = document.querySelector("#read");
-// var choice1El = document.querySelector("#choice1");
-var choice2El = document.querySelector("#choice2");
-var choice3El = document.querySelector("#choice3");
-var choice4El = document.querySelector("#choice4");
-var img = document.querySelector("img");
-
+// THEN a timer starts and I am presented with a question
 var timeRemain = document.querySelector("#timeRemain");
 var timeLeft = 100; // Create the countdown timer.
-
-//startボタンが押された！
-//user input====================================
-var startButton = document.querySelector("#start");
-startButton.addEventListener("click", quizStart());
-
-//function storage===================================================
-// THEN a timer starts and I am presented with a question
 function quizStart() {
   var timerInterval = setInterval(function () {
     timeLeft--;
@@ -115,94 +91,103 @@ function quizStart() {
   }, 1000);
 }
 
-//Quizの中身だ！
+//設問に必要な子たち。
+var question;
+var choice1;
+var choice2;
+var choice3;
+var choice4;
+var userAnswer;
+var correctAnswer;
+
+//HTML内の接続先。ボタンたち。
+var titleCallEl = document.querySelector("#titleCall");
+var readEl = document.querySelector("#read");
+var choice1El = document.querySelector("#choice1");
+var choice2El = document.querySelector("#choice2");
+var choice3El = document.querySelector("#choice3");
+var choice4El = document.querySelector("#choice4");
+var img = document.querySelector("img");
+
+//Helper functions============================================
 function quiz() {
-  //   if (question !== undefined) {
-  var i = 0; //question counter
+  for (let i = 0; i < questions.length; i++) {
+    //説文と解答
+    question = questions[i].q; //#readへ。
+    choice1 = questions[i].a[1];
+    choice2 = questions[i].a[2];
+    choice3 = questions[i].a[3];
+    choice4 = questions[i].a[4];
+    correctAnswer = questions[i].correct;
 
-  //説文と解答
-  question = questions[i].q; //#readへ。
-  choice1 = questions[i].a[0];
-  choice2 = questions[i].a[1];
-  choice3 = questions[i].a[2];
-  choice4 = questions[i].a[3];
-  correctAnswer = questions[i].correct;
+    //HTML内のタグに設問を流し込む。
+    var num = i + 1;
+    titleCallEl.innerHTML = "Question #" + num;
+    readEl.innerHTML = question;
+    choice1El.innerHTML = choice1;
+    choice2El.innerHTML = choice2;
+    choice3El.innerHTML = choice3;
+    choice4El.innerHTML = choice4;
 
-  //HTML内のタグに設問を流し込む。
-  var num = i + 1;
-  titleCallEl.innerHTML = "Question #" + num;
-  readEl.innerHTML = question;
-  startButton.innerHTML = choice1;
-  choice2El.innerHTML = choice2;
-  choice3El.innerHTML = choice3;
-  choice4El.innerHTML = choice4;
+    //user anser check
+    choice1El.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (choice1 === correctAnswer) {
+        img.setAttribute("src", "Assets/correct.jpg");
+        img.setAttribute("alt", "correct.jpg");
+      } else {
+        img.setAttribute("src", "Assets/wrong.jpg");
+        img.setAttribute("alt", "wrong.jpg");
+        timeLeft = timeLeft - 10;
+      }
+    });
 
-  //user anser check
-  startButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (choice1 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
-    }
-  });
+    choice2El.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (choice2 === correctAnswer) {
+        img.setAttribute("src", "Assets/correct.jpg");
+        img.setAttribute("alt", "correct.jpg");
+      } else {
+        img.setAttribute("src", "Assets/wrong.jpg");
+        img.setAttribute("alt", "wrong.jpg");
+        timeLeft = timeLeft - 10;
+      }
+    });
 
-  choice2El.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (choice2 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
-    }
-  });
+    choice3El.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (choice3 === correctAnswer) {
+        img.setAttribute("src", "Assets/correct.jpg");
+        img.setAttribute("alt", "correct.jpg");
+      } else {
+        img.setAttribute("src", "Assets/wrong.jpg");
+        img.setAttribute("alt", "wrong.jpg");
+        timeLeft = timeLeft - 10;
+      }
+    });
 
-  choice3El.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (choice3 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
-    }
-  });
-
-  choice4El.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (choice4 === correctAnswer) {
-      i++;
-      img.setAttribute("src", "Assets/correct.jpg");
-      img.setAttribute("alt", "correct.jpg");
-    } else {
-      i++;
-      img.setAttribute("src", "Assets/wrong.jpg");
-      img.setAttribute("alt", "wrong.jpg");
-      timeLeft = timeLeft - 10;
-    }
-  });
-  //   } else {
-  //     afterFinish();
-  //   }
+    choice4El.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (choice4 === correctAnswer) {
+        img.setAttribute("src", "Assets/correct.jpg");
+        img.setAttribute("alt", "correct.jpg");
+      } else {
+        img.setAttribute("src", "Assets/wrong.jpg");
+        img.setAttribute("alt", "wrong.jpg");
+        timeLeft = timeLeft - 10;
+      }
+    });
+  }
 }
 
-//Quizが終わった=================================
 var scoreArray = [];
 function afterFinish() {
   scoreArray.push(timeLeft);
 }
+
+// user input====================================
+var startButton = document.querySelector("#start"); //WHEN I click the start button
+startButton.addEventListener("click", quizStart());
 
 //Score Board====================================
 var highScore = document.querySelector("#highestScore");
@@ -219,3 +204,18 @@ function showScore() {
     mode = "text";
   }
 }
+// WHEN I answer a question
+
+// THEN I am presented with another question
+
+// WHEN I answer a question incorrectly
+
+// THEN time is subtracted from the clock
+
+// WHEN all questions are answered or the timer reaches 0
+
+// THEN the game is over
+
+// WHEN the game is over
+
+// THEN I can save my initials and score
