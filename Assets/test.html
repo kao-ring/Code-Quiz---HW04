@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var question;
+      var choice1;
+      var choice2;
+      var choice3;
+      var choice4;
+      var userAnswer;
+      var correctAnswer;
+      var questions = [
+        {
+          q: "Commonly data types DO NOT includes;",
+          a: ["strings", "numbers", "array", "boolean"],
+          correct: "array",
+        },
+        {
+          q:
+            "The condition in an if / else statement is enclosed within _____.",
+          a: ["quotation", "square brackets", "parentheses", "curly brackets"],
+          correct: "parentheses",
+        },
+        {
+          q: "Arrays in javascript canbe used  to store ______.",
+          a: [
+            "numbers and strings",
+            "other arrays",
+            "boolean",
+            "all of the above",
+          ],
+          correct: "all of the above",
+        },
+        {
+          q:
+            "Strings value must be enclosed within _____  when being assigned to variables.",
+          a: ["quotation", "square brackets", "parentheses", "curly brackets"],
+          correct: "quotation",
+        },
+        {
+          q:
+            "A very useful tool used during development adn debugging for printing content to the de bugger is;",
+          a: ["javascript", "Terminal/Bash", "for loops", "console.log"],
+          correct: "console.log",
+        },
+        {
+          q: "Inside which HTML element do we put the JavaScript?",
+          a: ["<script>", "<scripting>", "<js>", "<javascript>"],
+          correct: "<script>",
+        },
+        {
+          q:
+            "What is the correct JavaScript syntax to change the content of the HTML element below? <p id='demo'>This is a demonstration.</p>",
+          a: [
+            " document.getElementByName('p').innerHTML = 'Hello World!';",
+            " document.getElement('p').innerHTML = 'Hello World!';",
+            " #demo.innerHTML = 'Hello World!';",
+            " document.getElementById('demo').innerHTML = 'Hello World!';",
+          ],
+          correct:
+            " document.getElementById('demo').innerHTML = 'Hello World!';",
+        },
+        {
+          q: "How do you write 'Hello World' in an alert box?",
+          a: [
+            " alert('Hello World');",
+            "msg('Hello World');",
+            "alertBox('Hello World');",
+            "console.log('Hello World');",
+          ],
+          correct: " alert('Hello World');",
+        },
+        {
+          q: "How do you create a function in JavaScript?",
+          a: [
+            "function=myFunction()",
+            "function:myfunction()",
+            "function myFunction()",
+            "var function=function",
+          ],
+          correct: "function myFunction()",
+        },
+        {
+          q: "How can you add a comment in a JavaScript?",
+          a: [
+            "//This is a comment",
+            "'This is a comment",
+            "<!--This is a comment-->",
+            "%This is a comment%",
+          ],
+          correct: "//This is a comment",
+        },
+      ];
+
+      //それぞれを箱に入れます。
+      for (let i = 0; i < questions.length; i++) {
+        question = questions[i].q;
+        correctAnswer = questions[i].correct;
+        choice1 = questions[i].a[1];
+        choice2 = questions[i].a[2];
+        choice3 = questions[i].a[3];
+        choice4 = questions[i].a[4];
+      }
+      //   var img = document.querySelector("#img");
+    </script>
+    <img src="correct.jpg" alt="Kaori Caplan" />
+  </body>
+</html>

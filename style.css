@@ -1,0 +1,14 @@
+.container {
+  text-align: center;
+}
+h1 {
+  margin: 30px;
+  padding: 30px;
+}
+.row {
+  margin: 20px;
+}
+#start {
+  margin: 30px;
+  padding: 10px 30px 10px 30px;
+}
