@@ -86,7 +86,7 @@ var questionCount;
 //HTML内の接続先。ボタンたち。
 var titleCallEl = document.querySelector("#titleCall");
 var readEl = document.querySelector("#read");
-// var choice1El = document.querySelector("#choice1");
+var choice1El = document.querySelector("#choice1");
 var choice2El = document.querySelector("#choice2");
 var choice3El = document.querySelector("#choice3");
 var choice4El = document.querySelector("#choice4");
@@ -95,10 +95,19 @@ var img = document.querySelector("img");
 var timeRemain = document.querySelector("#timeRemain");
 var timeLeft = 100; // Create the countdown timer.
 
+//Initiarize. 標準配備。
+choice1El.style.display = "none";
+choice2El.style.display = "none";
+choice3El.style.display = "none";
+choice4El.style.display = "none";
+
 //startボタンが押された！
 //user input====================================
 var startButton = document.querySelector("#start");
-startButton.addEventListener("click", quizStart());
+startButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  quizStart();
+});
 
 //function storage===================================================
 // THEN a timer starts and I am presented with a question
@@ -110,16 +119,31 @@ function quizStart() {
 
     if (timeLeft === 0) {
       clearInterval(timerInterval);
-      afterFinish();
+      afterFinish;
     }
   }, 1000);
 }
 
 //Quizの中身だ！
 function quiz() {
-  //   if (question !== undefined) {
-  var i = 0; //question counter
+  startButton.style.display = "none";
+  choice1El.style.display = "initial";
+  choice2El.style.display = "initial";
+  choice3El.style.display = "initial";
+  choice4El.style.display = "initial";
+  setQuestion();
+  if (question === undefined) {
+    afterFinish();
+  } else {
+    var i = 0; //question counter
 
+    answerCheck();
+  }
+}
+
+//function for quiz
+
+function setQuestion() {
   //説文と解答
   question = questions[i].q; //#readへ。
   choice1 = questions[i].a[0];
@@ -136,9 +160,11 @@ function quiz() {
   choice2El.innerHTML = choice2;
   choice3El.innerHTML = choice3;
   choice4El.innerHTML = choice4;
+}
 
+function answerCheck() {
   //user anser check
-  startButton.addEventListener("click", function (event) {
+  choice1El.addEventListener("click", function (event) {
     event.preventDefault();
     if (choice1 === correctAnswer) {
       i++;
@@ -193,15 +219,18 @@ function quiz() {
       timeLeft = timeLeft - 10;
     }
   });
-  //   } else {
-  //     afterFinish();
-  //   }
 }
-
+//
 //Quizが終わった=================================
 var scoreArray = [];
 function afterFinish() {
   scoreArray.push(timeLeft);
+
+  //    <div class="form-group">
+  // <div>Your name</div>
+  // <input class="form-control" />
+  // <button class="btn btn-primary mt-5 bg-dark">Submit</button>
+  // </div>
 }
 
 //Score Board====================================
