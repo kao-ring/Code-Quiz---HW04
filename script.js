@@ -78,7 +78,7 @@ var userAnswer; //get a user's choice
 var correctAnswer; //store the corect answer
 var questionCount; //question number for getting array
 
-//DOM / HTML内の接続先。Buttons
+//DOM / Buttons
 var titleCallEl = document.querySelector("#titleCall");
 var readEl = document.querySelector("#read");
 var choice1El = document.querySelector("#choice0");
@@ -98,13 +98,13 @@ var timeLeft = 100; // Create the countdown timer.
 var i = 0; //question counter
 var timerInterval;
 
-//Initiarize. 標準配備。
+//Initiarize.
 choice1El.style.display = "none";
 choice2El.style.display = "none";
 choice3El.style.display = "none";
 choice4El.style.display = "none";
 form.style.display = "none";
-congrats.style.display = "initial";
+congrats.style.display = "none";
 
 //start button clicked!
 //user input====================================
@@ -118,8 +118,9 @@ startButton.addEventListener("click", function (event) {
 // THEN a timer starts and I am presented with a question
 function quizStart() {
   i = 0;
-  timeLeft = 100;
+  timeLeft = 60;
 
+  //Initialize all data when you playing again
   console.log("This is quizStart");
   choice1El.style.display = "none";
   choice2El.style.display = "none";
@@ -141,9 +142,10 @@ function quizStart() {
   }, 1000);
 }
 
-//Quizの中身だ！
+//inside of the Quiz!
 function quiz() {
   console.log("This is quiz");
+
   startButton.style.display = "none";
   choice1El.style.display = "initial";
   choice2El.style.display = "initial";
@@ -185,15 +187,15 @@ function quiz() {
 function setQuestion() {
   img.style.display = "none";
   console.log("This is setQuestion");
-  //説文と解答
-  question = questions[i].q; //#readへ。
+  //Set questions and answer choices
+  question = questions[i].q; //#read
   choice1 = questions[i].a[0];
   choice2 = questions[i].a[1];
   choice3 = questions[i].a[2];
   choice4 = questions[i].a[3];
   correctAnswer = questions[i].correct;
 
-  //HTML内のタグに設問を流し込む。
+  //inner HTML
   var num = i + 1;
   titleCallEl.innerHTML = "Question #" + num;
   readEl.innerHTML = question;
@@ -241,7 +243,7 @@ function afterFinish() {
       form.style.display = "none";
       img.style.display = "none";
 
-      highestScore = Math.max.apply(null, scoreArray); // scoreArrayの中から最大値を取る
+      highestScore = Math.max.apply(null, scoreArray); // Get max number from array
       userName.innerHTML = formText;
       finalScore.innerHTML =
         "You got " + timeLeft + ", your highest score is " + highestScore;
@@ -262,7 +264,7 @@ highScore.addEventListener("click", function (event) {
 });
 var highestScore;
 function showScore() {
-  highestScore = Math.max.apply(null, scoreArray); // scoreArrayの中から最大値を取る
+  highestScore = Math.max.apply(null, scoreArray); // Get max number from array
   if (mode === "text") {
     highScore.textContent = "Your highest score is: " + highestScore;
     mode = "score";
