@@ -1,10 +1,10 @@
 # 04 Web APIs: Code Quiz
 
+This is a quiz game. When you finish all questions, remain time will be your score. If you got wrong answer, you will penalized 5 seconds.
+
 https://kao-ring.github.io/Code-Quiz---HW04/
 
 https://github.com/kao-ring/Code-Quiz---HW04
-
-This is a quiz game. When you finish all questions, remain time will be your score. If you got wrong answer, you will penalized 5 seconds.
 
 ## Added function
 
@@ -18,18 +18,24 @@ This is a quiz game. When you finish all questions, remain time will be your sco
 
 - After all 10 questions, it will tell user's score and show a form to type in their name.
 
--When you type your name and hit submit button, you will see CONGRATS gif.
+- When you type your name and hit submit button, you will see CONGRATS gif.
 
-- There is a button on top left side. It shows your highest score. On the right side, it has a time remain counter.
+- There is a button on top left side. It shows your last score. It gets data from local storage. On the right side, it has a time remain counter.
 
-- There's a button says "Play One More?". If you hit this, you can play the same game but this time, you will have only odd number's question. Next time, it will skip more!
+- There's a button says "Play One More?". If you hit this, you can play the same game.
 
 ## Screen shot of Top screen and Last screen
 
 ![Screen Shot 2020-07-08 at 7 29 56 PM](https://user-images.githubusercontent.com/66850293/86984323-4a8b0c00-c15c-11ea-8b44-6d8f7084ac1b.png)
 ![Screen Shot 2020-07-08 at 7 30 12 PM](https://user-images.githubusercontent.com/66850293/86984325-4b23a280-c15c-11ea-9ff2-d1328f7edc66.png)
 
-## Acceptance Criteria
+## Bug Fix History
+
+- When I press "One More" button, it called function quiz() then it start reading setQuestion twice at once so I change it to reload.
+
+- I tried to store the score from previous playing in one array, but I just learned about local storage today, so I changed so I can get data from local storage.
+
+### Acceptance Criteria
 
 ```
 GIVEN I am taking a code quiz

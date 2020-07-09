@@ -92,6 +92,8 @@ var finalScore = document.querySelector("#finalScore");
 var oneMore = document.querySelector("#oneMore");
 var congrats = document.querySelector("#congrats");
 var answerButtons = document.querySelector("#answerButtons");
+var highestScore = document.querySelector("#highestScore");
+var count = localStorage.getItem("count");
 
 var timeRemain = document.querySelector("#timeRemain");
 var timeLeft = 100; // Create the countdown timer.
@@ -120,14 +122,14 @@ function quizStart() {
   i = 0;
   timeLeft = 60;
 
-  //Initialize all data when you playing again
-  console.log("This is quizStart");
-  choice1El.style.display = "none";
-  choice2El.style.display = "none";
-  choice3El.style.display = "none";
-  choice4El.style.display = "none";
-  form.style.display = "none";
-  congrats.style.display = "none";
+  // //Initialize all data when you playing again
+  // console.log("This is quizStart");
+  // choice1El.style.display = "none";
+  // choice2El.style.display = "none";
+  // choice3El.style.display = "none";
+  // choice4El.style.display = "none";
+  // form.style.display = "none";
+  // congrats.style.display = "none";
   quiz();
   timerInterval = setInterval(function () {
     timeLeft--;
@@ -163,11 +165,19 @@ function quiz() {
       console.log({ userAnswer, correctAnswer });
       if (userAnswer === correctAnswer) {
         i++;
+        choice1El.style.display = "none";
+        choice2El.style.display = "none";
+        choice3El.style.display = "none";
+        choice4El.style.display = "none";
         img.style.display = "initial";
         img.setAttribute("src", "Assets/correct.jpg");
         img.setAttribute("alt", "correct.jpg");
       } else {
         i++;
+        choice1El.style.display = "none";
+        choice2El.style.display = "none";
+        choice3El.style.display = "none";
+        choice4El.style.display = "none";
         img.style.display = "initial";
         img.setAttribute("src", "Assets/wrong.jpg");
         img.setAttribute("alt", "wrong.jpg");
@@ -185,6 +195,10 @@ function quiz() {
 //function for quiz
 
 function setQuestion() {
+  choice1El.style.display = "initial";
+  choice2El.style.display = "initial";
+  choice3El.style.display = "initial";
+  choice4El.style.display = "initial";
   img.style.display = "none";
   console.log("This is setQuestion");
   //Set questions and answer choices
@@ -243,33 +257,35 @@ function afterFinish() {
       form.style.display = "none";
       img.style.display = "none";
 
-      highestScore = Math.max.apply(null, scoreArray); // Get max number from array
+      localStorage.setItem("count", timeLeft);
+      // highestScore = Math.max.apply(null, scoreArray); // Get max number from array
       userName.innerHTML = formText;
       finalScore.innerHTML =
-        "You got " + timeLeft + ", your highest score is " + highestScore;
+        "You got " + timeLeft + ", your last score is " + count;
       oneMore.addEventListener("click", function () {
-        quizStart();
+        // quizStart();
+        document.location.reload();
       });
     }
   });
 }
 
 //Score Board====================================
-var highScore = document.querySelector("#highestScore");
 
 var mode = "text";
-highScore.addEventListener("click", function (event) {
+highestScore.addEventListener("click", function (event) {
   event.preventDefault();
   showScore();
 });
-var highestScore;
+// var highestScore;
 function showScore() {
-  highestScore = Math.max.apply(null, scoreArray); // Get max number from array
+  // highestScore = Math.max.apply(null, scoreArray); // Get max number from array
+
   if (mode === "text") {
-    highScore.textContent = "Your highest score is: " + highestScore;
+    highestScore.textContent = "Your last score is: " + count;
     mode = "score";
   } else {
-    highScore.textContent = "View Highest Score";
+    highestScore.textContent = "View last Score";
     mode = "text";
   }
 }
