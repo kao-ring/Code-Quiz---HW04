@@ -1,6 +1,6 @@
 var questions = [
   {
-    q: "Commonly data types DO NOT includes;",
+    q: "Common data types DO NOT include;",
     a: ["strings", "numbers", "array", "boolean"],
     correct: "array",
   },
@@ -10,7 +10,7 @@ var questions = [
     correct: "parentheses",
   },
   {
-    q: "Arrays in javascript canbe used  to store ______.",
+    q: "Arrays in javascript can be used  to store ______.",
     a: ["numbers and strings", "other arrays", "boolean", "all of the above"],
     correct: "all of the above",
   },
@@ -22,7 +22,7 @@ var questions = [
   },
   {
     q:
-      "A very useful tool used during development adn debugging for printing content to the de bugger is;",
+      "A very useful tool used during development and debugging for printing content to the de bugger is;",
     a: ["javascript", "Terminal/Bash", "for loops", "console.log"],
     correct: "console.log",
   },
@@ -122,15 +122,8 @@ function quizStart() {
   i = 0;
   timeLeft = 60;
 
-  // //Initialize all data when you playing again
-  // console.log("This is quizStart");
-  // choice1El.style.display = "none";
-  // choice2El.style.display = "none";
-  // choice3El.style.display = "none";
-  // choice4El.style.display = "none";
-  // form.style.display = "none";
-  // congrats.style.display = "none";
   quiz();
+
   timerInterval = setInterval(function () {
     timeLeft--;
     timeRemain.textContent = "Time: " + timeLeft;
